@@ -1,6 +1,7 @@
 {{ config(materialized='table') }}
 
-with source_data as (
+with
+source_data as (
 	SELECT
 		*
 		{{ dbt_utils.generate_surrogate_key(['name','id']) }} as testing_srgt_key
