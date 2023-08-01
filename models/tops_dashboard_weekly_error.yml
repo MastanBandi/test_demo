@@ -1,0 +1,58 @@
+
+version: 2
+
+models:
+  - name: tops_boca_daily_staging_errors
+    description: "staging error table for tops boca daily"
+    columns:
+      - name: 'boca_srgt_key'
+        description: ''
+      - name: 'building_id'
+        description: ''
+      - name: 'property_name'
+        description: ''
+      - name: 'property_ref'
+        description: ''
+      - name: 'floor_id'
+        description: ''
+      - name: 'floor_name'
+        description: ''
+      - name: 'floor_number'
+        description: ''
+      - name: 'one_card_or_sensor_peak'
+        description: ''
+      - name: 'date_of_card_or_sensor_peak'
+        description: ''
+      - name: 'bcd_date'
+        description: ''
+      - name: 'design_occ_divers_seat_count'
+        description: ''
+      - name: 'design_occ_vent_and_cooling'
+        description: ''
+      - name: 'risk_managed_occupancy'
+        description: ''
+      - name: 'means_of_escape_capacity'
+        description: ''
+      - name: 'toilet_provision'
+        description: ''
+      - name: 'ventilation_capacity'
+        description: ''
+      - name: 'bcd_updated_by'
+        description: ''
+      - name: 'failure_reason'
+        description: 'reason for failed preventive control checks'
+        tests:
+          - not_null:
+                tags: [ 'StructuralUnitTesting','ConstraintUnitTest','UnitTest' ]
+      - name: 'processed_file_name'
+        description: 'source file-name'
+      - name: 'processed_ts'
+        description: 'time of ingestion in raw-format'
+        tests:
+          - fin_commons.datatype:
+              accepted_type: TIMESTAMP
+              tags: [ 'DatatypeUnitTest','UnitTest' ]
+          - fin_commons.partition_column:
+              tags: [ 'PartitionUnitTest','UnitTest' ]
+          - not_null:
+                tags: [ 'StructuralUnitTesting','ConstraintUnitTest','UnitTest' ]
