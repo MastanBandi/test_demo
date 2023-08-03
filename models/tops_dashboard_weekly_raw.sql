@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='ephemeral') }}
 
 with source_data as (
 	SELECT
@@ -11,9 +11,9 @@ validated_data as (
 	SELECT
 		*,
         [
-            IF( SAFE_CAST(coalesce(name,'0000') AS int64) is NOT NULL,
+            IF( SAFE_CAST(coalesce(name,'0000') AS STRING) is NOT NULL,
                 STRUCT('NA' as col, 'NA' as error),STRUCT("name" as col,  CONCAT("dtypeCheckFailed [invalid string] [value: ",name,"]") as error)),
-            IF( SAFE_CAST(coalesce(branch,'0000') AS int64) is NOT NULL,
+            IF( SAFE_CAST(coalesce(branch,'0000') AS STRING) is NOT NULL,
                 STRUCT('NA' as col, 'NA' as error),STRUCT("branch" as col,  CONCAT("dtypeCheckFailed [invalid string] [value: ",branch,"]") as error)),
             IF( SAFE_CAST(coalesce(id,'0000') AS int64) is NOT NULL,
                 STRUCT('NA' as col, 'NA' as error),STRUCT("id" as col,  CONCAT("dtypeCheckFailed [invalid string] [value: ",id,"]") as error)),
