@@ -32,9 +32,12 @@ error_data as (
 )
 
 select
+	sd.testing_srgt_key
 	name,
 	branch,
 	id,
-	year
+	year,
+	sd.processed_file_name,
+	sd.processed_ts
 from source_data sd left join error_data ed
 on sd.testing_srgt_key= ed.testing_srgt_key
