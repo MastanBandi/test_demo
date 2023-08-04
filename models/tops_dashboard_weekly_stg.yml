@@ -2,92 +2,36 @@
 version: 2
 
 models:
-  - name: tops_boca_daily_staging
-    description: "staging table for tops boca daily"
-    tests:
-      - fin_commons.staging_record_count:
-          source_model: source('tops_raw','tops_boca_daily_raw')
-          error_model: ref('tops_boca_daily_staging_errors')
-          tags: ['CountUnitTest','UnitTest']
+  - name: tops_dashboard_weekly_stg
+    description: "staging table for tops dashboard weekly"
+    # tests:
+    #   - fin_commons.staging_record_count:
+    #      source_model: source('dmn01_finsoi_bqd_bandi','testing_table')
+    #      error_model: ref('tops_boca_daily_staging_errors')
+    #      tags: ['CountUnitTest','UnitTest']
     columns:
-      - name: 'boca_srgt_key'
+      - name: 'testing_srgt_key'
         description: ''
-      - name: 'building_id'
+      - name: 'name'
+        description: ''
+        tests:
+          - fin_commons.datatype:
+              accepted_type: STRING
+              tags: [ 'DatatypeUnitTest','UnitTest' ]
+      - name: 'branch'
+        description: ''
+      - name: 'id'
         description: ''
         tests:
           - fin_commons.datatype:
               accepted_type: INT64
               tags: [ 'DatatypeUnitTest','UnitTest' ]
-      - name: 'property_name'
-        description: ''
-      - name: 'property_ref'
-        description: ''
-      - name: 'floor_id'
-        description: ''
-        tests:
-          - fin_commons.datatype:
-              accepted_type: INT64
-              tags: [ 'DatatypeUnitTest','UnitTest' ]
-      - name: 'floor_name'
-        description: ''
-      - name: 'floor_number'
-        description: ''
-      - name: 'one_card_or_sensor_peak'
-        description: ''
-        tests:
-          - fin_commons.datatype:
-              accepted_type: INT64
-              tags: [ 'DatatypeUnitTest','UnitTest' ]
-      - name: 'date_of_card_or_sensor_peak'
+      - name: 'year'
         description: ''
         tests:
           - fin_commons.datatype:
               accepted_type: DATE
-              tags: [ 'DatatypeUnitTest','UnitTest' ]
-      - name: 'bcd_date'
-        description: ''
-        tests:
-          - fin_commons.datatype:
-              accepted_type: DATE
-              tags: [ 'DatatypeUnitTest','UnitTest' ]
-      - name: 'design_occ_divers_seat_count'
-        description: ''
-        tests:
-          - fin_commons.datatype:
-              accepted_type: INT64
-              tags: [ 'DatatypeUnitTest','UnitTest' ]
-      - name: 'design_occ_vent_and_cooling'
-        description: ''
-        tests:
-          - fin_commons.datatype:
-              accepted_type: INT64
-              tags: [ 'DatatypeUnitTest','UnitTest' ]
-      - name: 'risk_managed_occupancy'
-        description: ''
-        tests:
-          - fin_commons.datatype:
-              accepted_type: INT64
-              tags: [ 'DatatypeUnitTest','UnitTest' ]
-      - name: 'means_of_escape_capacity'
-        description: ''
-        tests:
-          - fin_commons.datatype:
-              accepted_type: INT64
-              tags: [ 'DatatypeUnitTest','UnitTest' ]
-      - name: 'toilet_provision'
-        description: ''
-        tests:
-          - fin_commons.datatype:
-              accepted_type: INT64
-              tags: [ 'DatatypeUnitTest','UnitTest' ]
-      - name: 'ventilation_capacity'
-        description: ''
-        tests:
-          - fin_commons.datatype:
-              accepted_type: INT64
-              tags: [ 'DatatypeUnitTest','UnitTest' ]
-      - name: 'bcd_updated_by'
-        description: ''
+              tags: ['StructuralUnitTesting','DataTypeUnitTest']
       - name: 'processed_file_name'
         description: 'source file-name'
       - name: 'processed_ts'
